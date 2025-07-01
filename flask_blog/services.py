@@ -4,6 +4,7 @@ from pathlib import Path
 import markdown
 from flask import current_app
 from .models import db, User, Comment
+from .extensions import cache
 
 class PostService:
     """文章服务类"""
@@ -58,8 +59,9 @@ class PostService:
         return metadata, html_content
     
     @staticmethod
+    @cache.cached(timeout=21600, key_prefix='get_all_posts')
     def get_all_posts():
-        """获取所有文章"""
+        """获取所有文章（缓存6小时）"""
         posts = []
         posts_dir = current_app.config['POSTS_DIR']
         
@@ -83,8 +85,9 @@ class PostService:
         return posts
     
     @staticmethod
+    @cache.memoize(timeout=21600)
     def get_post_by_slug(slug):
-        """根据slug获取文章"""
+        """根据slug获取文章（缓存6小时，基于slug参数自动生成缓存键）"""
         file_path = os.path.join(current_app.config['POSTS_DIR'], f'{slug}.md')
         if not os.path.exists(file_path):
             return None

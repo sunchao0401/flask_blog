@@ -22,9 +22,8 @@ def index():
                          blog_title=current_app.config['BLOG_TITLE'])
 
 @blog_bp.route('/post/<slug>')
-@cache.cached(timeout=600, key_prefix=lambda: f'blog_post_{request.view_args["slug"]}')
 def post(slug):
-    """文章详情页(缓存10分钟)"""
+    """文章详情页"""
     result = PostService.get_post_by_slug(slug)
     if not result:
         abort(404)
