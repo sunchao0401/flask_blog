@@ -1,0 +1,332 @@
+/* 主要样式文件 */
+
+/* 基础样式 */
+body {
+    line-height: var(--line-height-normal);
+    color: #333;
+}
+
+.navbar-brand {
+    font-weight: var(--font-weight-bold);
+    font-size: var(--font-size-2xl);
+}
+
+/* 文章卡片样式 */
+.post-card {
+    transition: transform 0.2s, box-shadow 0.2s;
+    border: none;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.post-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.post-meta {
+    color: #666;
+    font-size: var(--font-size-sm);
+}
+
+/* 文章内容样式 */
+.post-content {
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-relaxed);
+}
+
+.post-content h1 {
+    font-size: var(--font-size-3xl);
+    font-weight: var(--font-weight-bold);
+}
+
+.post-content h2 {
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-semibold);
+}
+
+.post-content h3 {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-semibold);
+}
+
+.post-content h1, .post-content h2, .post-content h3 {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    color: #2c3e50;
+}
+
+/* 代码高亮样式 */
+.post-content code {
+    background-color: #f8f9fa;
+    color: #d63384;
+    padding: 0.2rem 0.4rem;
+    border-radius: 0.25rem;
+    font-size: var(--font-size-sm);
+}
+
+.post-content pre {
+    background-color: #2d3748;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    margin: 1.5rem 0;
+    overflow-x: auto;
+    border: 1px solid #e2e8f0;
+}
+
+.post-content pre code {
+    background: none;
+    color: #f8f8f2;
+    font-size: var(--font-size-sm);
+    padding: 0;
+    border-radius: 0;
+}
+
+/* Prism.js 代码块样式增强 */
+.post-content pre[class*="language-"] {
+    background-color: #2d3748;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    margin: 1.5rem 0;
+    overflow-x: auto;
+    border: 1px solid #e2e8f0;
+}
+
+.post-content code[class*="language-"] {
+    background: none;
+    color: #f8f8f2;
+    font-size: var(--font-size-sm);
+    padding: 0;
+    border-radius: 0;
+}
+
+/* 页脚样式 */
+.footer {
+    background-color: #f8f9fa;
+    padding: 2rem 0;
+    margin-top: 3rem;
+}
+
+/* 分类标签样式 */
+.category-badge {
+    background-color: #007bff;
+    color: white;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-size: var(--font-size-xs);
+    text-decoration: none;
+}
+
+.category-badge:hover {
+    background-color: #0056b3;
+    color: white;
+}
+
+/* 评论区域样式 */
+.comments-section {
+    margin-top: 3rem;
+}
+
+.comments-list .card {
+    border-left: 4px solid #007bff;
+}
+
+.comments-list .card:hover {
+    border-left-color: #0056b3;
+}
+
+.comment-form {
+    background-color: #f8f9fa;
+    border-radius: 0.5rem;
+}
+
+.comment-meta {
+    font-size: var(--font-size-sm);
+}
+
+.comment-content {
+    line-height: var(--line-height-normal);
+}
+
+/* 文章详情页主标题 */
+.display-4 {
+    font-size: var(--font-size-4xl) !important;
+    font-weight: var(--font-weight-bold);
+}
+
+.card-title {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+}
+
+.badge-top {
+    font-size: var(--font-size-xs);
+    padding: 0.2em 0.5em;
+}
+
+.btn-readmore {
+    font-size: var(--font-size-sm);
+    padding: 0.3em 0.8em;
+}
+
+/* 侧边栏样式 */
+.sidebar-box, .about-sidebar, .toc-sidebar {
+    position: sticky;
+    top: 2rem;
+    background: #fff;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    padding: 1rem 1.2rem;
+    margin-bottom: 2rem;
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+.sidebar-box h5, .about-sidebar h5, .toc-sidebar h5 {
+    font-size: var(--font-size-lg);
+    margin-bottom: 1rem;
+    font-weight: var(--font-weight-semibold);
+}
+
+/* 目录导航样式 */
+.toc-sidebar ul {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 0;
+}
+
+.toc-sidebar li {
+    margin-bottom: 0.3em;
+}
+
+.toc-sidebar a {
+    color: #007bff;
+    text-decoration: none;
+    font-size: var(--font-size-sm);
+    transition: color 0.2s;
+}
+
+.toc-sidebar a:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+/* 首页标题样式 */
+.index-title {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-semibold);
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .sidebar-box, .about-sidebar, .toc-sidebar {
+        position: static;
+        max-height: none;
+    }
+}
+
+/* 嵌套评论样式 */
+.comment-item {
+    transition: all 0.2s ease;
+    border-left: 4px solid #007bff;
+}
+
+.comment-item:hover {
+    border-left-color: #0056b3;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.comment-item[data-level="1"] {
+    border-left-color: #28a745;
+    margin-left: 20px;
+}
+
+.comment-item[data-level="2"] {
+    border-left-color: #ffc107;
+    margin-left: 40px;
+}
+
+/* 回复表单样式 */
+.reply-form {
+    background-color: #f8f9fa;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    margin-top: 1rem;
+    border: 1px solid #dee2e6;
+}
+
+.reply-form .form-control {
+    border: 1px solid #ced4da;
+}
+
+.reply-form .form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+/* 回复按钮样式 */
+.reply-btn {
+    color: #007bff;
+    text-decoration: none;
+    font-size: var(--font-size-sm);
+    transition: color 0.2s ease;
+}
+
+.reply-btn:hover {
+    color: #0056b3;
+    text-decoration: none;
+}
+
+.reply-btn.btn-outline-secondary {
+    color: #6c757d;
+    border: 1px solid #6c757d;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+}
+
+.reply-btn.btn-outline-secondary:hover {
+    color: #fff;
+    background-color: #6c757d;
+}
+
+/* 取消回复按钮样式 */
+.cancel-reply {
+    font-size: var(--font-size-sm);
+    padding: 0.25rem 0.5rem;
+}
+
+/* 评论层级指示器 */
+.comment-level-indicator {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 0.5rem;
+    background-color: #007bff;
+}
+
+.comment-item[data-level="1"] .comment-level-indicator {
+    background-color: #28a745;
+}
+
+.comment-item[data-level="2"] .comment-level-indicator {
+    background-color: #ffc107;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .comment-item[data-level] {
+        margin-left: 10px !important;
+    }
+    
+    .comment-item[data-level="2"] {
+        margin-left: 20px !important;
+    }
+    
+    .reply-form .row {
+        margin: 0;
+    }
+    
+    .reply-form .col-md-4 {
+        padding: 0 0.5rem;
+    }
+} 

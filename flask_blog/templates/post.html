@@ -1,0 +1,155 @@
+{% extends "base.html" %}
+
+{% block title %}{{ post.title }} - {{ blog_title }}{% endblock %}
+
+{% block content %}
+<article class="row">
+    <div class="col-lg-8">
+        <nav aria-label="breadcrumb" class="mb-4">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="{{ url_for('blog.index') }}">
+                        <i class="fas fa-home me-1"></i>首页
+                    </a>
+                </li>
+                {% if post.category %}
+                <li class="breadcrumb-item">
+                    <a href="{{ url_for('blog.category', category=post.category) }}">{{ post.category }}</a>
+                </li>
+                {% endif %}
+                <li class="breadcrumb-item active" aria-current="page">{{ post.title }}</li>
+            </ol>
+        </nav>
+
+        <header class="mb-4">
+            <h1 class="display-4">{{ post.title }}</h1>
+            
+            <div class="post-meta mb-3">
+                <i class="fas fa-calendar me-1"></i>
+                {{ post.date }}
+                {% if post.author %}
+                <span class="ms-3">
+                    <i class="fas fa-user me-1"></i>
+                    {{ post.author }}
+                </span>
+                {% endif %}
+                {% if post.category %}
+                <span class="ms-3">
+                    <i class="fas fa-tag me-1"></i>
+                    <a href="{{ url_for('blog.category', category=post.category) }}" class="category-badge">
+                        {{ post.category }}
+                    </a>
+                </span>
+                {% endif %}
+            </div>
+            
+            {% if post.description %}
+            <div class="alert alert-info">
+                <i class="fas fa-info-circle me-2"></i>
+                {{ post.description }}
+            </div>
+            {% endif %}
+        </header>
+
+        <div class="post-content">
+            {{ content|safe }}
+        </div>
+
+        <hr class="my-5">
+        
+        <!-- 评论区域 -->
+        <div class="comments-section">
+            <h3 class="mb-4">
+                <i class="fas fa-comments me-2"></i>评论 ({{ comments|length }})
+            </h3>
+            
+            <!-- 评论表单 -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-edit me-2"></i>发表评论
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <form method="POST" action="{{ url_for('blog.add_comment', slug=post.slug) }}">
+                        {{ form.csrf_token }}
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="author" class="form-label">姓名 *</label>
+                                {{ form.author(class="form-control", maxlength="50", required=true) }}
+                                {% if form.author.errors %}
+                                    <div class="text-danger">
+                                        {% for error in form.author.errors %}
+                                            <small>{{ error }}</small>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="email" class="form-label">邮箱 *</label>
+                                {{ form.email(class="form-control", required=true) }}
+                                {% if form.email.errors %}
+                                    <div class="text-danger">
+                                        {% for error in form.email.errors %}
+                                            <small>{{ error }}</small>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="content" class="form-label">评论内容 *</label>
+                            {{ form.content(class="form-control", rows="4", maxlength="1000", required=true, placeholder="请输入您的评论...") }}
+                            <div class="form-text">最多1000个字符</div>
+                            {% if form.content.errors %}
+                                <div class="text-danger">
+                                    {% for error in form.content.errors %}
+                                        <small>{{ error }}</small>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-paper-plane me-1"></i>提交评论
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- 评论列表 -->
+            {% if comments %}
+            <div class="comments-list">
+                {% for comment in comments %}
+                    {% include 'comment_item.html' %}
+                {% endfor %}
+            </div>
+            {% else %}
+            <div class="alert alert-info">
+                <i class="fas fa-info-circle me-2"></i>还没有评论，快来发表第一条评论吧！
+            </div>
+            {% endif %}
+        </div>
+
+        <hr class="my-5">
+        
+        <div class="d-flex justify-content-between align-items-center">
+            <a href="{{ url_for('blog.index') }}" class="btn btn-outline-primary">
+                <i class="fas fa-arrow-left me-1"></i>返回首页
+            </a>
+            
+            {% if post.category %}
+            <a href="{{ url_for('blog.category', category=post.category) }}" class="btn btn-outline-secondary">
+                <i class="fas fa-tag me-1"></i>查看分类
+            </a>
+            {% endif %}
+        </div>
+    </div>
+    
+    <div class="col-lg-4">
+        <div class="toc-sidebar">
+            <h5><i class="fas fa-list me-2"></i>目录导航</h5>
+            <div id="toc-list"></div>
+        </div>
+    </div>
+</article>
+{% endblock %} 
